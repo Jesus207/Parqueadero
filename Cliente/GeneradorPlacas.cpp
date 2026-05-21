@@ -1,22 +1,33 @@
 #include "GeneradorPlacas.h"
 
+#include <vector>
 #include <cstdlib>
 
 using namespace std;
 
 string GeneradorPlacas::generar(){
 
-string placa="";
+static vector<string> placas={
+"ABC123",
+"XYZ999",
+"JKL456",
+"ABC123",
+"MNO888",
+"XYZ999",
+"PQR777"
+};
 
-for(int i=0;i<3;i++)
-placa+=char(
-'A'+rand()%26
-);
+static int indice=0;
 
-for(int i=0;i<3;i++)
-placa+=char(
-'0'+rand()%10
-);
+string placa=
+placas[indice];
+
+indice++;
+
+if(
+indice>=placas.size()
+)
+indice=0;
 
 return placa;
 

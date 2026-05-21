@@ -1,73 +1,133 @@
 #include "Parqueadero.h"
 
 #include <iostream>
-
+#include <fstream>
 #include <ctime>
+
+#include "../Libreria/ParqueaderoLib.h"
 
 using namespace std;
 
-Parqueadero::
-Parqueadero(){
+Parqueadero::Parqueadero(){
 
-siguienteCelda=1;
+    siguienteCelda=1;
 
 }
 
-void Parqueadero::
-procesarPlaca(
-string placa
+void Parqueadero::procesarPlaca(
+    string placa
 ){
 
-time_t ahora=time(0);
+    time_t ahora=time(0);
 
-string hora=
-ctime(&ahora);
+    string hora=
+    ctime(&ahora);
 
-hora.pop_back();
+    hora.pop_back();
 
-if(
-placas.count(
-placa
-)
-){
+    if(
+        placas.count(
+            placa
+        )
+    ){
 
-int celda=
-placas[placa];
+        int celda=
+        placas[placa];
 
-cout<<endl;
+        string evento=
 
-cout
-<<"SALIDA -> "
-<<placa
-<<" | Celda "
-<<celda
-<<" liberada | "
-<<hora
-<<endl;
+        "SALIDA -> "
+        +placa+
+        " | Celda "
+        +to_string(celda)+
+        " liberada | "
+        +hora;
 
-placas.erase(
-placa
-);
+        cout
+        <<evento
+        <<endl;
 
-}
-else{
+        guardarEvento(
+            evento.c_str()
+        );
 
-placas[placa]=
-siguienteCelda;
+        ofstream archivo(
+            "/workspaces/Parqueadero/historial.txt",
+            ios::app
+        );
 
-cout<<endl;
+        archivo
+        <<evento
+        <<endl;
 
-cout
-<<"ENTRADA -> "
-<<placa
-<<" | Celda "
-<<siguienteCelda
-<<" ocupada | "
-<<hora
-<<endl;
+        archivo.close();
 
-siguienteCelda++;
+        placas.erase(
+            placa
+        );
 
-}
+        celdasLibres.push(
+            celda
+        );
+
+    }
+
+    else{
+
+        int celda;
+
+        if(
+            !celdasLibres.empty()
+        ){
+
+            celda=
+            celdasLibres.front();
+
+            celdasLibres.pop();
+
+        }
+
+        else{
+
+            celda=
+            siguienteCelda;
+
+            siguienteCelda++;
+
+        }
+
+        placas[
+            placa
+        ]=celda;
+
+        string evento=
+
+        "ENTRADA -> "
+        +placa+
+        " | Celda "
+        +to_string(celda)+
+        " ocupada | "
+        +hora;
+
+        cout
+        <<evento
+        <<endl;
+
+        guardarEvento(
+            evento.c_str()
+        );
+
+        ofstream archivo(
+            "/workspaces/Parqueadero/historial.txt",
+            ios::app
+        );
+
+        archivo
+        <<evento
+        <<endl;
+
+        archivo.close();
+
+    }
 
 }

@@ -3,12 +3,19 @@
 
 #include <string>
 #include <map>
+#include <queue>
 
-class Parqueadero {
+class Parqueadero{
 
 private:
 
-std::map<std::string,int> placas;
+std::map<
+std::string,
+int
+> placas;
+
+std::queue<int>
+celdasLibres;
 
 int siguienteCelda;
 
