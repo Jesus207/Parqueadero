@@ -1,0 +1,7 @@
+Explicación del sistema
+
+El sistema funciona bajo una arquitectura cliente-servidor usando sockets TCP.
+
+El servidor gestiona las placas utilizando un unordered_map para acceso eficiente.
+
+Cuando una placa se repite, se interpreta como salida del vehículo.
