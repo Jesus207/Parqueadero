@@ -1,21 +1,48 @@
 #!/bin/bash
 
-echo "Compilando libreria..."
+echo "=================================="
+echo " SISTEMA DE PARQUEADERO "
+echo "=================================="
 
-cd Libreria
+echo ""
+echo "Compilando SWIG..."
+
+cd Libreria || exit
+
+swig -python -c++ ParqueaderoLib.i
+
+g++ -fPIC -c \
+ParqueaderoLib.cpp \
+ParqueaderoLib_wrap.cxx \
+-I/usr/include/python3.12
+
+g++ -shared \
+ParqueaderoLib.o \
+ParqueaderoLib_wrap.o \
+-o _ParqueaderoLib.so
 
 g++ -shared -fPIC \
 ParqueaderoLib.cpp \
 -o libparqueadero.so
 
-cd ../Servidor
+cd ..
+
+echo ""
+echo "Compilando servidor..."
+
+cd Servidor || exit
 
 g++ Servidor.cpp \
 Parqueadero.cpp \
 ../Libreria/ParqueaderoLib.cpp \
 -o servidor
 
-cd ../Cliente
+cd ..
+
+echo ""
+echo "Compilando cliente..."
+
+cd Cliente || exit
 
 g++ Cliente.cpp \
 GeneradorPlacas.cpp \
@@ -23,19 +50,20 @@ GeneradorPlacas.cpp \
 
 cd ..
 
-echo "Iniciando..."
+echo ""
+echo "Iniciando sistema..."
 
 (
 cd Servidor
 ./servidor
-)&
+) &
 
 sleep 2
 
 (
 cd Cliente
 ./cliente
-)&
+) &
 
 sleep 2
 
@@ -43,3 +71,5 @@ sleep 2
 cd Visualizador
 python3 visualizador.py
 )
+
+wait

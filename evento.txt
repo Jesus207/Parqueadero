@@ -1,1 +1,1 @@
-ENTRADA -> XYZ999 | Celda 4 ocupada | Thu May 21 06:10:42 2026
+ENTRADA -> XYZ999 | Celda 5 ocupada | Thu May 21 06:16:29 2026
