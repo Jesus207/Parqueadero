@@ -1,1 +1,1 @@
-SALIDA -> ABC123 | Celda 4 liberada | Thu May 21 05:27:46 2026
+ENTRADA -> XYZ999 | Celda 4 ocupada | Thu May 21 06:10:42 2026

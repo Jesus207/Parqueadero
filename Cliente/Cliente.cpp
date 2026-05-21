@@ -39,7 +39,7 @@ htons(8080);
 
 inet_pton(
 AF_INET,
-"127.0.0.1",
+"10.0.1.65",
 &servidor.sin_addr
 );
 

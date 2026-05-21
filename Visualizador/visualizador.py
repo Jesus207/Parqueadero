@@ -1,24 +1,88 @@
-import ctypes
-import time
+import sys
+import tkinter as tk
 
-lib = ctypes.CDLL(
-    "/workspaces/Parqueadero/Libreria/libparqueadero.so"
+sys.path.append(
+    "/workspaces/Parqueadero/Libreria"
 )
 
-lib.obtenerEvento.restype = ctypes.c_char_p
+import ParqueaderoLib
+
+parqueadero = {}
+
+ventana = tk.Tk()
+
+ventana.title(
+    "Parqueadero"
+)
+
+ventana.geometry(
+    "700x500"
+)
+
+titulo = tk.Label(
+    ventana,
+    text="VISUALIZADOR DEL PARQUEADERO",
+    font=("Arial", 16, "bold")
+)
+
+titulo.pack(
+    pady=10
+)
+
+frame = tk.Frame(
+    ventana
+)
+
+frame.pack()
+
+estado = tk.Label(
+    ventana,
+    text="Esperando..."
+)
+
+estado.pack(
+    pady=20
+)
+
+celdas = []
+
+for i in range(10):
+
+    lbl = tk.Label(
+        frame,
+
+        text=f"Celda {i+1}\nLIBRE",
+
+        width=15,
+
+        height=5,
+
+        bg="green",
+
+        fg="white",
+
+        relief="raised"
+    )
+
+    lbl.grid(
+        row=i//5,
+        column=i%5,
+        padx=10,
+        pady=10
+    )
+
+    celdas.append(
+        lbl
+    )
 
 ultimo = ""
 
-print(
-    "VISUALIZADOR DEL PARQUEADERO"
-)
 
-while True:
+def actualizar():
 
-    evento = (
-        lib.obtenerEvento()
-        .decode()
-    )
+    global ultimo
+
+    evento = ParqueaderoLib.obtenerEvento()
 
     if (
         evento
@@ -26,12 +90,79 @@ while True:
         evento != ultimo
     ):
 
-        print(
-            evento
+        partes = evento.split(
+            "|"
+        )
+
+        placa = (
+            partes[0]
+            .split("->")[1]
+            .strip()
+        )
+
+        texto = partes[1]
+
+        numero = int(
+            ''.join(
+                filter(
+                    str.isdigit,
+                    texto
+                )
+            )
+        )
+
+        celda = numero - 1
+
+        if (
+            "ENTRADA"
+            in evento
+        ):
+
+            parqueadero[
+                celda
+            ] = placa
+
+            celdas[
+                celda
+            ].config(
+
+                text=f"Celda {celda+1}\n{placa}",
+
+                bg="red"
+            )
+
+        else:
+
+            if (
+                celda
+                in parqueadero
+            ):
+
+                del parqueadero[
+                    celda
+                ]
+
+            celdas[
+                celda
+            ].config(
+
+                text=f"Celda {celda+1}\nLIBRE",
+
+                bg="green"
+            )
+
+        estado.config(
+            text=evento
         )
 
         ultimo = evento
 
-    time.sleep(
-        1
+    ventana.after(
+        1000,
+        actualizar
     )
+
+
+actualizar()
+
+ventana.mainloop()
