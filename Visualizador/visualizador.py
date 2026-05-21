@@ -1,168 +1,71 @@
+import time
 import sys
-import tkinter as tk
 
-sys.path.append(
-    "/workspaces/Parqueadero/Libreria"
-)
+from rich.console import Console
+from rich.table import Table
+from rich.live import Live
+
+sys.path.append("/workspaces/Parqueadero/Libreria")
 
 import ParqueaderoLib
 
+console = Console()
+
 parqueadero = {}
+ultimo = "Esperando..."
 
-ventana = tk.Tk()
 
-ventana.title(
-    "Parqueadero"
-)
+def generar_tabla():
+    table = Table(title="🚗 SISTEMA DE PARQUEADERO EN TIEMPO REAL")
 
-ventana.geometry(
-    "700x500"
-)
+    table.add_column("Celdas", justify="center", style="cyan")
+    table.add_column("Estado", justify="center")
+    table.add_column("Placa", justify="center", style="green")
 
-titulo = tk.Label(
-    ventana,
-    text="VISUALIZADOR DEL PARQUEADERO",
-    font=("Arial", 16, "bold")
-)
+    for i in range(1, 11):
+        if i in parqueadero:
+            table.add_row(str(i), "OCUPADA 🔴", parqueadero[i])
+        else:
+            table.add_row(str(i), "LIBRE 🟢", "---")
 
-titulo.pack(
-    pady=10
-)
-
-frame = tk.Frame(
-    ventana
-)
-
-frame.pack()
-
-estado = tk.Label(
-    ventana,
-    text="Esperando..."
-)
-
-estado.pack(
-    pady=20
-)
-
-celdas = []
-
-for i in range(10):
-
-    lbl = tk.Label(
-        frame,
-
-        text=f"Celda {i+1}\nLIBRE",
-
-        width=15,
-
-        height=5,
-
-        bg="green",
-
-        fg="white",
-
-        relief="raised"
-    )
-
-    lbl.grid(
-        row=i//5,
-        column=i%5,
-        padx=10,
-        pady=10
-    )
-
-    celdas.append(
-        lbl
-    )
-
-ultimo = ""
+    return table
 
 
 def actualizar():
-
     global ultimo
 
-    evento = ParqueaderoLib.obtenerEvento()
+    console.print("Iniciando sistema de visualización...\n", style="bold yellow")
 
-    if (
-        evento
-        and
-        evento != ultimo
-    ):
+    with Live(generar_tabla(), refresh_per_second=2, console=console) as live:
 
-        partes = evento.split(
-            "|"
-        )
+        while True:
+            try:
+                evento = ParqueaderoLib.obtenerEvento()
 
-        placa = (
-            partes[0]
-            .split("->")[1]
-            .strip()
-        )
+                if not evento or evento == ultimo:
+                    time.sleep(1)
+                    continue
 
-        texto = partes[1]
+                partes = evento.split("|")
 
-        numero = int(
-            ''.join(
-                filter(
-                    str.isdigit,
-                    texto
-                )
-            )
-        )
+                placa = partes[0].split("->")[1].strip()
+                numero = int(''.join(filter(str.isdigit, partes[1])))
 
-        celda = numero - 1
+                if "ENTRADA" in evento:
+                    parqueadero[numero] = placa
+                else:
+                    if numero in parqueadero:
+                        del parqueadero[numero]
 
-        if (
-            "ENTRADA"
-            in evento
-        ):
+                ultimo = evento
 
-            parqueadero[
-                celda
-            ] = placa
+                live.update(generar_tabla())
 
-            celdas[
-                celda
-            ].config(
+            except Exception as e:
+                console.print(f"[red]ERROR: {e}[/red]")
 
-                text=f"Celda {celda+1}\n{placa}",
-
-                bg="red"
-            )
-
-        else:
-
-            if (
-                celda
-                in parqueadero
-            ):
-
-                del parqueadero[
-                    celda
-                ]
-
-            celdas[
-                celda
-            ].config(
-
-                text=f"Celda {celda+1}\nLIBRE",
-
-                bg="green"
-            )
-
-        estado.config(
-            text=evento
-        )
-
-        ultimo = evento
-
-    ventana.after(
-        1000,
-        actualizar
-    )
+            time.sleep(1)
 
 
-actualizar()
-
-ventana.mainloop()
+if __name__ == "__main__":
+    actualizar()
