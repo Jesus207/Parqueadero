@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+
+    "configurations": [
+        {
+            "name": "Ejecutar Generador",
+
+            "type": "cppdbg",
+
+            "request": "launch",
+
+            "program":
+            "${workspaceFolder}/Generador/generador.exe",
+
+            "args": [],
+
+            "cwd":
+            "${workspaceFolder}/Generador",
+
+            "stopAtEntry": false,
+
+            "externalConsole": true,
+
+            "MIMode": "gdb"
+        }
+    ]
+}
