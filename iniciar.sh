@@ -1,75 +1,61 @@
 #!/bin/bash
 
 echo "=================================="
-echo " SISTEMA DE PARQUEADERO "
+echo "   INICIANDO SISTEMA PARQUEADERO"
 echo "=================================="
 
-echo ""
-echo "Compilando SWIG..."
+# Verificar archivos
+if [ ! -f "./servidor" ]; then
+    echo "ERROR: servidor no encontrado"
+    exit 1
+fi
 
-cd Libreria || exit
+if [ ! -f "./cliente" ]; then
+    echo "ERROR: cliente no encontrado"
+    exit 1
+fi
 
-swig -python -c++ ParqueaderoLib.i
+if [ ! -f "./visualizador.py" ]; then
+    echo "ERROR: visualizador.py no encontrado"
+    exit 1
+fi
 
-g++ -fPIC -c \
-ParqueaderoLib.cpp \
-ParqueaderoLib_wrap.cxx \
--I/usr/include/python3.12
+# Crear archivo de eventos si no existe
+touch evento.txt
 
-g++ -shared \
-ParqueaderoLib.o \
-ParqueaderoLib_wrap.o \
--o _ParqueaderoLib.so
-
-g++ -shared -fPIC \
-ParqueaderoLib.cpp \
--o libparqueadero.so
-
-cd ..
-
-echo ""
-echo "Compilando servidor..."
-
-cd Servidor || exit
-
-g++ Servidor.cpp \
-Parqueadero.cpp \
-../Libreria/ParqueaderoLib.cpp \
--o servidor
-
-cd ..
-
-echo ""
-echo "Compilando cliente..."
-
-cd Cliente || exit
-
-g++ Cliente.cpp \
-GeneradorPlacas.cpp \
--o cliente
-
-cd ..
-
-echo ""
-echo "Iniciando sistema..."
-
-(
-cd Servidor
-./servidor
-) &
+# Iniciar servidor
+echo "Iniciando servidor..."
+./servidor &
+SERVER_PID=$!
 
 sleep 2
 
-(
-cd Cliente
-./cliente
-) &
+# Iniciar cliente
+echo "Iniciando cliente..."
+./cliente &
+CLIENT_PID=$!
 
 sleep 2
 
-(
-cd Visualizador
-python3 visualizador.py
-)
+# Iniciar visualizador
+echo "Iniciando visualizador..."
+python3 visualizador.py &
+VISUAL_PID=$!
+
+echo "=================================="
+echo "Sistema corriendo"
+echo "Servidor PID: $SERVER_PID"
+echo "Cliente PID: $CLIENT_PID"
+echo "Visualizador PID: $VISUAL_PID"
+echo "=================================="
+
+# Cerrar todo al salir
+trap "
+echo 'Cerrando sistema...'
+kill $SERVER_PID
+kill $CLIENT_PID
+kill $VISUAL_PID
+exit
+" INT
 
 wait

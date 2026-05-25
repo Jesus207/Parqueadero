@@ -3,10 +3,12 @@
 
 #include <string>
 
-class GeneradorPlacas{
-public:
+using namespace std;
 
-std::string generar();
+class GeneradorPlacas {
+
+public:
+    string generar();
 
 };
 
