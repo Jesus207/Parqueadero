@@ -4,27 +4,39 @@ echo "=================================="
 echo "   INICIANDO SISTEMA PARQUEADERO"
 echo "=================================="
 
-# Verificar archivos
-if [ ! -f "./servidor" ]; then
-    echo "ERROR: servidor no encontrado"
+# Limpiar archivo de eventos
+> evento.txt
+
+echo "Compilando servidor..."
+
+g++ \
+Servidor/Servidor.cpp \
+Servidor/Parqueadero.cpp \
+-o servidor
+
+if [ $? -ne 0 ]; then
+    echo "ERROR compilando servidor"
     exit 1
 fi
 
-if [ ! -f "./cliente" ]; then
-    echo "ERROR: cliente no encontrado"
+echo "Compilando cliente..."
+
+g++ \
+Cliente/Cliente.cpp \
+Cliente/GeneradorPlacas.cpp \
+-o cliente
+
+if [ $? -ne 0 ]; then
+    echo "ERROR compilando cliente"
     exit 1
 fi
 
-if [ ! -f "./visualizador.py" ]; then
-    echo "ERROR: visualizador.py no encontrado"
-    exit 1
-fi
-
-# Crear archivo de eventos si no existe
-touch evento.txt
+echo "Servidor compilado"
+echo "Cliente compilado"
 
 # Iniciar servidor
 echo "Iniciando servidor..."
+
 ./servidor &
 SERVER_PID=$!
 
@@ -32,6 +44,7 @@ sleep 2
 
 # Iniciar cliente
 echo "Iniciando cliente..."
+
 ./cliente &
 CLIENT_PID=$!
 
@@ -39,6 +52,7 @@ sleep 2
 
 # Iniciar visualizador
 echo "Iniciando visualizador..."
+
 python3 visualizador.py &
 VISUAL_PID=$!
 
@@ -49,12 +63,17 @@ echo "Cliente PID: $CLIENT_PID"
 echo "Visualizador PID: $VISUAL_PID"
 echo "=================================="
 
-# Cerrar todo al salir
 trap "
+echo ''
 echo 'Cerrando sistema...'
-kill $SERVER_PID
-kill $CLIENT_PID
-kill $VISUAL_PID
+
+kill $SERVER_PID 2>/dev/null
+kill $CLIENT_PID 2>/dev/null
+kill $VISUAL_PID 2>/dev/null
+
+rm -f servidor
+rm -f cliente
+
 exit
 " INT
 
