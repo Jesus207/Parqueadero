@@ -5,28 +5,24 @@
 #include <map>
 #include <queue>
 
-class Parqueadero{
+using namespace std;
+
+class Parqueadero {
+public:
+    Parqueadero();
+    string procesarPlaca(string placa);
 
 private:
+    map<string, int> placas;
+    queue<int> celdasLibres;
 
-std::map<
-std::string,
-int
-> placas;
+    int siguienteCelda;
 
-std::queue<int>
-celdasLibres;
-
-int siguienteCelda;
-
-public:
-
-Parqueadero();
-
-void procesarPlaca(
-std::string placa
-);
-
+    // ESTADÍSTICAS DEL SISTEMA
+    int capacidadMax;
+    int totalEntradas;
+    int totalSalidas;
+    int ocupacion;
 };
 
 #endif

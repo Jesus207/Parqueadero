@@ -1,133 +1,51 @@
 #include "Parqueadero.h"
-
 #include <iostream>
-#include <fstream>
-#include <ctime>
-
-#include "../Libreria/ParqueaderoLib.h"
+#include <vector>
+#include <cstdlib>
 
 using namespace std;
 
-Parqueadero::Parqueadero(){
+vector<string> celdas(12, "");
 
-    siguienteCelda=1;
+Parqueadero::Parqueadero(){}
 
-}
+string Parqueadero::procesarPlaca(string placa){
 
-void Parqueadero::procesarPlaca(
-    string placa
-){
+    // Si ya existe -> salida
+    for(int i=0; i<12; i++){
 
-    time_t ahora=time(0);
+        if(celdas[i] == placa){
 
-    string hora=
-    ctime(&ahora);
+            celdas[i] = "";
 
-    hora.pop_back();
-
-    if(
-        placas.count(
-            placa
-        )
-    ){
-
-        int celda=
-        placas[placa];
-
-        string evento=
-
-        "SALIDA -> "
-        +placa+
-        " | Celda "
-        +to_string(celda)+
-        " liberada | "
-        +hora;
-
-        cout
-        <<evento
-        <<endl;
-
-        guardarEvento(
-            evento.c_str()
-        );
-
-        ofstream archivo(
-            "/workspaces/Parqueadero/historial.txt",
-            ios::app
-        );
-
-        archivo
-        <<evento
-        <<endl;
-
-        archivo.close();
-
-        placas.erase(
-            placa
-        );
-
-        celdasLibres.push(
-            celda
-        );
-
+            return "SALIDA -> " +
+                   placa +
+                   " | Celda " +
+                   to_string(i+1) +
+                   " liberada";
+        }
     }
 
-    else{
+    // Entrada
+    vector<int> libres;
 
-        int celda;
+    for(int i=0; i<12; i++){
 
-        if(
-            !celdasLibres.empty()
-        ){
-
-            celda=
-            celdasLibres.front();
-
-            celdasLibres.pop();
-
-        }
-
-        else{
-
-            celda=
-            siguienteCelda;
-
-            siguienteCelda++;
-
-        }
-
-        placas[
-            placa
-        ]=celda;
-
-        string evento=
-
-        "ENTRADA -> "
-        +placa+
-        " | Celda "
-        +to_string(celda)+
-        " ocupada | "
-        +hora;
-
-        cout
-        <<evento
-        <<endl;
-
-        guardarEvento(
-            evento.c_str()
-        );
-
-        ofstream archivo(
-            "/workspaces/Parqueadero/historial.txt",
-            ios::app
-        );
-
-        archivo
-        <<evento
-        <<endl;
-
-        archivo.close();
-
+        if(celdas[i] == "")
+            libres.push_back(i);
     }
 
+    if(libres.empty())
+        return "PARQUEADERO LLENO";
+
+    int pos =
+        libres[rand()%libres.size()];
+
+    celdas[pos] = placa;
+
+    return "ENTRADA -> " +
+           placa +
+           " | Celda " +
+           to_string(pos+1) +
+           " ocupada";
 }

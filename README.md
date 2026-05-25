@@ -5,7 +5,7 @@ Proyecto desarrollado en C++, Python y SWIG para la gestión de un parqueadero m
 ## Funciones
 
 - Generación automática de placas
-- Comunicación mediante sockets TCP
+- Comunicación mediante socket3s TCP
 - Registro de entradas y salidas
 - Reutilización de celdas
 - Librerías dinámicas con SWIG
