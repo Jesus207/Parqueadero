@@ -6,7 +6,9 @@ echo "=================================="
 
 # Limpiar archivo de eventos
 > evento.txt
-
+echo "instalando herramientas externas..."
+pip install python3
+pip install pandas
 echo "Compilando servidor..."
 
 g++ \
@@ -52,7 +54,6 @@ sleep 2
 
 # Iniciar visualizador
 echo "Iniciando visualizador..."
-
 python3 visualizador.py &
 VISUAL_PID=$!
 
