@@ -7,7 +7,8 @@ echo "=================================="
 # Limpiar archivo de eventos
 > evento.txt
 echo "instalando herramientas externas..."
-pip install python3
+sudo apt update
+sudo apt install python3 python3-pip -y
 pip install pandas
 echo "Compilando servidor..."
 
