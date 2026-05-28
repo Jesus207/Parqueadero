@@ -4,5 +4,6 @@
 #include "ParqueaderoLib.h"
 %}
 
-extern void guardarEvento(const char* evento);
-extern const char* obtenerEvento();
+%include "std_string.i"
+%include "std_vector.i"
+%include "ParqueaderoLib.h"

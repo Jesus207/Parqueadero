@@ -1,26 +1,30 @@
 #include <iostream>
 #include <cstring>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <fstream>
-#include <ctime>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 
-#include "Parqueadero.h"
+#include "ParqueaderoLib.h"
 
 using namespace std;
 
-Parqueadero parqueadero;
+Parqueadero p;
 
 int main() {
 
-    int servidor_fd, cliente_fd;
+    WSADATA wsa;
+    if (WSAStartup(MAKEWORD(2,2), &wsa) != 0) {
+        cout << "Error iniciando Winsock" << endl;
+        return 1;
+    }
+
+    SOCKET servidor_fd, cliente_fd;
     sockaddr_in direccion;
     char buffer[1024];
 
     servidor_fd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (servidor_fd < 0) {
-        cout << "Error creando socket" << endl;
+    if (servidor_fd == INVALID_SOCKET) {
+        cout << "Error creando socket: " << WSAGetLastError() << endl;
         return 1;
     }
 
@@ -29,7 +33,7 @@ int main() {
     direccion.sin_port = htons(8080);
 
     if (bind(servidor_fd, (sockaddr*)&direccion, sizeof(direccion)) < 0) {
-        cout << "Error en bind" << endl;
+        cout << "Error en bind: " << WSAGetLastError() << endl;
         return 1;
     }
 
@@ -37,12 +41,12 @@ int main() {
 
     cout << "Servidor esperando..." << endl;
 
-    socklen_t tam = sizeof(direccion);
+    int tam = sizeof(direccion);
 
     cliente_fd = accept(servidor_fd, (sockaddr*)&direccion, &tam);
 
-    if (cliente_fd < 0) {
-        cout << "Error en accept" << endl;
+    if (cliente_fd == INVALID_SOCKET) {
+        cout << "Error en accept: " << WSAGetLastError() << endl;
         return 1;
     }
 
@@ -52,55 +56,27 @@ int main() {
 
         memset(buffer, 0, sizeof(buffer));
 
-        int n = read(cliente_fd, buffer, sizeof(buffer) - 1);
+        int n = recv(cliente_fd, buffer, sizeof(buffer) - 1, 0);
 
-        // Si el cliente se desconecta
         if (n <= 0) {
             cout << "Cliente desconectado" << endl;
             break;
         }
 
-        buffer[n] = '\0';
-
-        // Placa recibida
         string placa(buffer);
 
-        cout << "Placa recibida: "
-            << placa
-            << endl;
+        cout << "Placa recibida: " << placa << endl;
 
-        // Procesar entrada / salida
-        string respuesta =
-            parqueadero.procesarPlaca(placa);
+        string respuesta = p.procesarPlaca(placa);
 
         cout << respuesta << endl;
 
-        // Guardar evento en archivo
-        ofstream archivo(
-            "evento.txt",
-            ios::app
-        );
-
-        if (archivo.is_open()) {
-
-            time_t ahora = time(0);
-
-            archivo << respuesta
-                    << " | "
-                    << ctime(&ahora);
-
-            archivo.close();
-        }
-
-        // Respuesta al cliente
-        send(
-            cliente_fd,
-            respuesta.c_str(),
-            respuesta.size(),
-            0
-        );
+        send(cliente_fd, respuesta.c_str(), respuesta.size(), 0);
     }
-    close(cliente_fd);
-    close(servidor_fd);
+
+    closesocket(cliente_fd);
+    closesocket(servidor_fd);
+    WSACleanup();
+
     return 0;
 }

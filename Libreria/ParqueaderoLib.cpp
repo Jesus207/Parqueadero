@@ -1,20 +1,19 @@
 #include "ParqueaderoLib.h"
-#include <fstream>
-#include <string>
 
-using namespace std;
-
-void guardarEvento(const char* evento) {
-    std::ofstream file("eventos.txt", std::ios::app);
-    file << evento << std::endl;
+string Parqueadero::procesarPlaca(string placa) {
+    guardarEvento("Procesando placa: " + placa);
+    return "OK " + placa;
 }
 
-const char* obtenerEvento() {
-    static string texto;
+void Parqueadero::guardarEvento(string evento) {
+    eventos.push_back(evento);
+}
 
-    ifstream archivo("/workspaces/Parqueadero-V2.0/evento.txt");
-    getline(archivo, texto);
-    archivo.close();
+string Parqueadero::obtenerUltimoEvento() {
+    if (eventos.empty()) return "Sin eventos";
+    return eventos.back();
+}
 
-    return texto.c_str();
+string Parqueadero::obtenerEstado() {
+    return "Eventos registrados: " + to_string(eventos.size());
 }

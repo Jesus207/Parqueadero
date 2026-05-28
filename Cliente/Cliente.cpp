@@ -1,9 +1,11 @@
 #include <iostream>
 #include <cstring>
-#include <unistd.h>
-#include <arpa/inet.h>
 #include <ctime>
 #include <cstdlib>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+
+#pragma comment(lib, "ws2_32.lib")
 
 using namespace std;
 
@@ -27,9 +29,13 @@ int main() {
 
     srand(time(NULL));
 
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
+    // Inicializar Winsock
+    WSADATA wsa;
+    WSAStartup(MAKEWORD(2,2), &wsa);
 
-    if (sock < 0) {
+    SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    if (sock == INVALID_SOCKET) {
         cout << "Error creando socket cliente" << endl;
         return 1;
     }
@@ -39,10 +45,9 @@ int main() {
     servidor.sin_port = htons(8080);
     servidor.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-    // 🔁 conexión con reintento
     while (connect(sock, (sockaddr*)&servidor, sizeof(servidor)) < 0) {
         cout << "Reintentando conexión..." << endl;
-        sleep(2);
+        Sleep(2000); // Windows usa Sleep(ms)
     }
 
     cout << "Conectado al servidor" << endl;
@@ -55,8 +60,11 @@ int main() {
 
         cout << "Enviado: " << placa << endl;
 
-        sleep(2 + rand() % 4); // 2 a 5 segundos
+        Sleep((2 + rand() % 4) * 1000);
     }
+
+    closesocket(sock);
+    WSACleanup();
 
     return 0;
 }

@@ -5,6 +5,10 @@ import os
 
 ARCHIVO = "evento.txt"
 
+# Asegurar que el archivo exista
+if not os.path.exists(ARCHIVO):
+    open(ARCHIVO, "w").close()
+
 # Parqueadero 3x4 = 12 puestos
 filas = 3
 columnas = 4
@@ -17,12 +21,12 @@ parqueadero = pd.DataFrame(
 
 ultima_linea = ""
 
-def obtener_placa():
 
+def obtener_placa():
     global ultima_linea
 
     try:
-        with open(ARCHIVO, "r") as f:
+        with open(ARCHIVO, "r", encoding="utf-8") as f:
             lineas = f.readlines()
 
         if not lineas:
@@ -30,15 +34,11 @@ def obtener_placa():
 
         ultima = lineas[-1].strip()
 
-        # Evita procesar la misma línea varias veces
+        # Evita procesar la misma línea
         if ultima == ultima_linea:
             return None
 
         ultima_linea = ultima
-
-        # Ej:
-        # ENTRADA -> ABC123 | Celda 5 ocupada | ...
-        # SALIDA -> ABC123 | Celda 5 liberada | ...
 
         if "->" in ultima:
             placa = ultima.split("->")[1].split("|")[0].strip()
@@ -51,87 +51,50 @@ def obtener_placa():
 
 
 def buscar_placa(placa):
+    for fila in parqueadero.index:
+        for col in parqueadero.columns:
+            if parqueadero.loc[fila, col] == placa:
+                return (fila, col)
+    return None
 
+
+def actualizar(placa):
+
+    # Revisar si ya está
     for fila in parqueadero.index:
         for col in parqueadero.columns:
 
             if parqueadero.loc[fila, col] == placa:
-                return (fila, col)
-
-    return None
-
-
-def celdas_libres():
-
-    libres = []
-
-    for fila in parqueadero.index:
-        for col in parqueadero.columns:
-
-            if parqueadero.loc[fila, col] == "LIBRE":
-                libres.append((fila, col))
-
-    return libres
-
-def actualizar(placa):
-
-    # Revisar si la placa YA está parqueada
-    for fila in parqueadero.index:
-        for col in parqueadero.columns:
-
-            valor = parqueadero.loc[fila, col]
-
-            if valor == placa:
-
-                # El carro salió
                 parqueadero.loc[fila, col] = "LIBRE"
-
-                print(
-                    f"SALIDA -> {placa}"
-                )
-
+                print(f"SALIDA -> {placa}")
                 return
 
-
-    # Si NO existe -> entrada
+    # Buscar libres
     libres = []
 
     for fila in parqueadero.index:
         for col in parqueadero.columns:
-
             if parqueadero.loc[fila, col] == "LIBRE":
-
                 libres.append((fila, col))
 
-
-    # Si no hay espacio
     if len(libres) == 0:
-
         print("PARQUEADERO LLENO")
-
         return
 
-
-    # Elegir celda aleatoria
     lugar = random.choice(libres)
-
     f, c = lugar
 
     parqueadero.loc[f, c] = placa
 
-    print(
-        f"ENTRADA -> {placa}"
-    )
-    
+    print(f"ENTRADA -> {placa}")
+
+
 def puesto(nombre, placa):
 
     if placa == "LIBRE":
-
         carro = "░░░░░"
         texto = "LIBRE"
-
     else:
-
         carro = "🚘"
         texto = placa[:6]
 
@@ -140,9 +103,8 @@ def puesto(nombre, placa):
 
 def dibujar():
 
-    os.system("clear")
-    # Windows:
-    # os.system("cls")
+    # FIX WINDOWS / LINUX
+    os.system("cls" if os.name == "nt" else "clear")
 
     print("""
 _________________________________________
