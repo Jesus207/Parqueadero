@@ -3440,12 +3440,14 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_Parqueadero swig_types[0]
-#define SWIGTYPE_p_char swig_types[1]
-#define SWIGTYPE_p_std__invalid_argument swig_types[2]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[3]
-static swig_type_info *swig_types[5];
-static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
+#define SWIGTYPE_p_Celda swig_types[0]
+#define SWIGTYPE_p_Evento swig_types[1]
+#define SWIGTYPE_p_Parqueadero swig_types[2]
+#define SWIGTYPE_p_char swig_types[3]
+#define SWIGTYPE_p_std__invalid_argument swig_types[4]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[5]
+static swig_type_info *swig_types[7];
+static swig_module_info swig_module = {swig_types, 6, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4284,6 +4286,13 @@ SWIG_From_std_string  (const std::string& s)
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -5038,6 +5047,482 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_Celda_nombre_set(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Celda *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Celda_nombre_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Celda, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Celda_nombre_set" "', argument " "1"" of type '" "Celda *""'"); 
+  }
+  arg1 = reinterpret_cast< Celda * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Celda_nombre_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Celda_nombre_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->nombre = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Celda_nombre_get(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Celda *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Celda, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Celda_nombre_get" "', argument " "1"" of type '" "Celda *""'"); 
+  }
+  arg1 = reinterpret_cast< Celda * >(argp1);
+  result = (std::string *) & ((arg1)->nombre);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Celda_placa_set(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Celda *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Celda_placa_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Celda, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Celda_placa_set" "', argument " "1"" of type '" "Celda *""'"); 
+  }
+  arg1 = reinterpret_cast< Celda * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Celda_placa_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Celda_placa_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->placa = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Celda_placa_get(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Celda *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Celda, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Celda_placa_get" "', argument " "1"" of type '" "Celda *""'"); 
+  }
+  arg1 = reinterpret_cast< Celda * >(argp1);
+  result = (std::string *) & ((arg1)->placa);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Celda(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Celda *result = 0 ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "new_Celda", 0, 0, 0)) SWIG_fail;
+  result = (Celda *)new Celda();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Celda, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Celda(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Celda *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Celda, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Celda" "', argument " "1"" of type '" "Celda *""'"); 
+  }
+  arg1 = reinterpret_cast< Celda * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Celda_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj = NULL;
+  if (!SWIG_Python_UnpackTuple(args, "swigregister", 1, 1, &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Celda, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *Celda_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_Evento_hora_set(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Evento_hora_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_hora_set" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Evento_hora_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Evento_hora_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->hora = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_hora_get(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_hora_get" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  result = (std::string *) & ((arg1)->hora);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_placa_set(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Evento_placa_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_placa_set" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Evento_placa_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Evento_placa_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->placa = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_placa_get(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_placa_get" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  result = (std::string *) & ((arg1)->placa);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_celda_set(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Evento_celda_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_celda_set" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Evento_celda_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Evento_celda_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->celda = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_celda_get(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_celda_get" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  result = (std::string *) & ((arg1)->celda);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_tipo_set(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Evento_tipo_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_tipo_set" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Evento_tipo_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Evento_tipo_set" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  if (arg1) (arg1)->tipo = *arg2;
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Evento_tipo_get(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Evento_tipo_get" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  result = (std::string *) & ((arg1)->tipo);
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Evento(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *result = 0 ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "new_Evento", 0, 0, 0)) SWIG_fail;
+  result = (Evento *)new Evento();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Evento, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Evento(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Evento *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Evento, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Evento" "', argument " "1"" of type '" "Evento *""'"); 
+  }
+  arg1 = reinterpret_cast< Evento * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Evento_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj = NULL;
+  if (!SWIG_Python_UnpackTuple(args, "swigregister", 1, 1, &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Evento, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *Evento_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_Parqueadero(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Parqueadero *result = 0 ;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "new_Parqueadero", 0, 0, 0)) SWIG_fail;
+  result = (Parqueadero *)new Parqueadero();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Parqueadero, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Parqueadero_procesarPlaca(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Parqueadero *arg1 = 0 ;
@@ -5071,32 +5556,24 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Parqueadero_guardarEvento(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Parqueadero_obtenerEstado(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Parqueadero *arg1 = 0 ;
-  std::string arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  PyObject *swig_obj[2] ;
+  PyObject *swig_obj[1] ;
+  std::string result;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "Parqueadero_guardarEvento", 2, 2, swig_obj)) SWIG_fail;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Parqueadero, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Parqueadero_guardarEvento" "', argument " "1"" of type '" "Parqueadero *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Parqueadero_obtenerEstado" "', argument " "1"" of type '" "Parqueadero *""'"); 
   }
   arg1 = reinterpret_cast< Parqueadero * >(argp1);
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "Parqueadero_guardarEvento" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  (arg1)->guardarEvento(SWIG_STD_MOVE(arg2));
-  resultobj = SWIG_Py_Void();
+  result = (arg1)->obtenerEstado();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
   return NULL;
@@ -5127,38 +5604,48 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Parqueadero_obtenerEstado(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Parqueadero_obtenerTotal(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Parqueadero *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::string result;
+  int result;
   
   (void)self;
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Parqueadero, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Parqueadero_obtenerEstado" "', argument " "1"" of type '" "Parqueadero *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Parqueadero_obtenerTotal" "', argument " "1"" of type '" "Parqueadero *""'"); 
   }
   arg1 = reinterpret_cast< Parqueadero * >(argp1);
-  result = (arg1)->obtenerEstado();
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  result = (int)(arg1)->obtenerTotal();
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_Parqueadero(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Parqueadero_obtenerLibres(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Parqueadero *result = 0 ;
+  Parqueadero *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "new_Parqueadero", 0, 0, 0)) SWIG_fail;
-  result = (Parqueadero *)new Parqueadero();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Parqueadero, SWIG_POINTER_NEW |  0 );
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Parqueadero, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Parqueadero_obtenerLibres" "', argument " "1"" of type '" "Parqueadero *""'"); 
+  }
+  arg1 = reinterpret_cast< Parqueadero * >(argp1);
+  result = (int)(arg1)->obtenerLibres();
+  resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
   return NULL;
@@ -5218,11 +5705,32 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Parqueadero_procesarPlaca", _wrap_Parqueadero_procesarPlaca, METH_VARARGS, NULL},
-	 { "Parqueadero_guardarEvento", _wrap_Parqueadero_guardarEvento, METH_VARARGS, NULL},
-	 { "Parqueadero_obtenerUltimoEvento", _wrap_Parqueadero_obtenerUltimoEvento, METH_O, NULL},
-	 { "Parqueadero_obtenerEstado", _wrap_Parqueadero_obtenerEstado, METH_O, NULL},
+	 { "Celda_nombre_set", _wrap_Celda_nombre_set, METH_VARARGS, NULL},
+	 { "Celda_nombre_get", _wrap_Celda_nombre_get, METH_O, NULL},
+	 { "Celda_placa_set", _wrap_Celda_placa_set, METH_VARARGS, NULL},
+	 { "Celda_placa_get", _wrap_Celda_placa_get, METH_O, NULL},
+	 { "new_Celda", _wrap_new_Celda, METH_NOARGS, NULL},
+	 { "delete_Celda", _wrap_delete_Celda, METH_O, NULL},
+	 { "Celda_swigregister", Celda_swigregister, METH_O, NULL},
+	 { "Celda_swiginit", Celda_swiginit, METH_VARARGS, NULL},
+	 { "Evento_hora_set", _wrap_Evento_hora_set, METH_VARARGS, NULL},
+	 { "Evento_hora_get", _wrap_Evento_hora_get, METH_O, NULL},
+	 { "Evento_placa_set", _wrap_Evento_placa_set, METH_VARARGS, NULL},
+	 { "Evento_placa_get", _wrap_Evento_placa_get, METH_O, NULL},
+	 { "Evento_celda_set", _wrap_Evento_celda_set, METH_VARARGS, NULL},
+	 { "Evento_celda_get", _wrap_Evento_celda_get, METH_O, NULL},
+	 { "Evento_tipo_set", _wrap_Evento_tipo_set, METH_VARARGS, NULL},
+	 { "Evento_tipo_get", _wrap_Evento_tipo_get, METH_O, NULL},
+	 { "new_Evento", _wrap_new_Evento, METH_NOARGS, NULL},
+	 { "delete_Evento", _wrap_delete_Evento, METH_O, NULL},
+	 { "Evento_swigregister", Evento_swigregister, METH_O, NULL},
+	 { "Evento_swiginit", Evento_swiginit, METH_VARARGS, NULL},
 	 { "new_Parqueadero", _wrap_new_Parqueadero, METH_NOARGS, NULL},
+	 { "Parqueadero_procesarPlaca", _wrap_Parqueadero_procesarPlaca, METH_VARARGS, NULL},
+	 { "Parqueadero_obtenerEstado", _wrap_Parqueadero_obtenerEstado, METH_O, NULL},
+	 { "Parqueadero_obtenerUltimoEvento", _wrap_Parqueadero_obtenerUltimoEvento, METH_O, NULL},
+	 { "Parqueadero_obtenerTotal", _wrap_Parqueadero_obtenerTotal, METH_O, NULL},
+	 { "Parqueadero_obtenerLibres", _wrap_Parqueadero_obtenerLibres, METH_O, NULL},
 	 { "delete_Parqueadero", _wrap_delete_Parqueadero, METH_O, NULL},
 	 { "Parqueadero_swigregister", Parqueadero_swigregister, METH_O, NULL},
 	 { "Parqueadero_swiginit", Parqueadero_swiginit, METH_VARARGS, NULL},
@@ -5232,24 +5740,32 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static swig_type_info _swigt__p_Celda = {"_p_Celda", "Celda *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Evento = {"_p_Evento", "Evento *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Parqueadero = {"_p_Parqueadero", "Parqueadero *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_Celda,
+  &_swigt__p_Evento,
   &_swigt__p_Parqueadero,
   &_swigt__p_char,
   &_swigt__p_std__invalid_argument,
   &_swigt__p_swig__SwigPyIterator,
 };
 
+static swig_cast_info _swigc__p_Celda[] = {  {&_swigt__p_Celda, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Evento[] = {  {&_swigt__p_Evento, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Parqueadero[] = {  {&_swigt__p_Parqueadero, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_Celda,
+  _swigc__p_Evento,
   _swigc__p_Parqueadero,
   _swigc__p_char,
   _swigc__p_std__invalid_argument,

@@ -118,24 +118,53 @@ class SwigPyIterator(object):
 
 # Register SwigPyIterator in _ParqueaderoLib:
 _ParqueaderoLib.SwigPyIterator_swigregister(SwigPyIterator)
+class Celda(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+    nombre = property(_ParqueaderoLib.Celda_nombre_get, _ParqueaderoLib.Celda_nombre_set)
+    placa = property(_ParqueaderoLib.Celda_placa_get, _ParqueaderoLib.Celda_placa_set)
+
+    def __init__(self):
+        _ParqueaderoLib.Celda_swiginit(self, _ParqueaderoLib.new_Celda())
+    __swig_destroy__ = _ParqueaderoLib.delete_Celda
+
+# Register Celda in _ParqueaderoLib:
+_ParqueaderoLib.Celda_swigregister(Celda)
+class Evento(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+    hora = property(_ParqueaderoLib.Evento_hora_get, _ParqueaderoLib.Evento_hora_set)
+    placa = property(_ParqueaderoLib.Evento_placa_get, _ParqueaderoLib.Evento_placa_set)
+    celda = property(_ParqueaderoLib.Evento_celda_get, _ParqueaderoLib.Evento_celda_set)
+    tipo = property(_ParqueaderoLib.Evento_tipo_get, _ParqueaderoLib.Evento_tipo_set)
+
+    def __init__(self):
+        _ParqueaderoLib.Evento_swiginit(self, _ParqueaderoLib.new_Evento())
+    __swig_destroy__ = _ParqueaderoLib.delete_Evento
+
+# Register Evento in _ParqueaderoLib:
+_ParqueaderoLib.Evento_swigregister(Evento)
 class Parqueadero(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
+    def __init__(self):
+        _ParqueaderoLib.Parqueadero_swiginit(self, _ParqueaderoLib.new_Parqueadero())
+
     def procesarPlaca(self, placa):
         return _ParqueaderoLib.Parqueadero_procesarPlaca(self, placa)
-
-    def guardarEvento(self, evento):
-        return _ParqueaderoLib.Parqueadero_guardarEvento(self, evento)
-
-    def obtenerUltimoEvento(self):
-        return _ParqueaderoLib.Parqueadero_obtenerUltimoEvento(self)
 
     def obtenerEstado(self):
         return _ParqueaderoLib.Parqueadero_obtenerEstado(self)
 
-    def __init__(self):
-        _ParqueaderoLib.Parqueadero_swiginit(self, _ParqueaderoLib.new_Parqueadero())
+    def obtenerUltimoEvento(self):
+        return _ParqueaderoLib.Parqueadero_obtenerUltimoEvento(self)
+
+    def obtenerTotal(self):
+        return _ParqueaderoLib.Parqueadero_obtenerTotal(self)
+
+    def obtenerLibres(self):
+        return _ParqueaderoLib.Parqueadero_obtenerLibres(self)
     __swig_destroy__ = _ParqueaderoLib.delete_Parqueadero
 
 # Register Parqueadero in _ParqueaderoLib:

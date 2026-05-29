@@ -4,32 +4,16 @@
 #include <cstdlib>
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#include "GeneradorPlacas.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
 using namespace std;
 
-string generarPlaca() {
-    string letras = "ABCDEFGHI";
-    string numeros = "0123456789";
-
-    string placa = "";
-
-    placa += letras[rand() % letras.size()];
-    placa += letras[rand() % letras.size()];
-    placa += letras[rand() % letras.size()];
-    placa += numeros[rand() % 10];
-    placa += numeros[rand() % 10];
-    placa += numeros[rand() % 10];
-
-    return placa;
-}
-
 int main() {
 
     srand(time(NULL));
 
-    // Inicializar Winsock
     WSADATA wsa;
     WSAStartup(MAKEWORD(2,2), &wsa);
 
@@ -43,18 +27,20 @@ int main() {
     sockaddr_in servidor;
     servidor.sin_family = AF_INET;
     servidor.sin_port = htons(8080);
-    servidor.sin_addr.s_addr = inet_addr("127.0.0.1");
+    servidor.sin_addr.s_addr = inet_addr("127.0.0.1"); // IP del servidor
 
     while (connect(sock, (sockaddr*)&servidor, sizeof(servidor)) < 0) {
         cout << "Reintentando conexión..." << endl;
-        Sleep(2000); // Windows usa Sleep(ms)
+        Sleep(2000);
     }
 
     cout << "Conectado al servidor" << endl;
 
+    GeneradorPlacas gen;
+
     while (true) {
 
-        string placa = generarPlaca();
+        string placa = gen.generar();
 
         send(sock, placa.c_str(), placa.size(), 0);
 
