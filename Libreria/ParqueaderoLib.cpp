@@ -2,6 +2,7 @@
 #include <ctime>
 #include <sstream>
 #include <fstream>
+#include <cstdlib>
 
 Parqueadero::Parqueadero() {
     string nombres[] = {"A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4"};
@@ -45,21 +46,26 @@ string Parqueadero::procesarPlaca(string placa) {
     }
 
     // Buscar celda libre → ENTRADA
-    for (auto& c : celdas) {
-        if (c.placa == "LIBRE") {
-            c.placa = placa;
-            ev.celda = c.nombre;
-            ev.tipo = "ENTRADA";
-            eventos.push_back(ev);
-
-            string linea = ev.tipo + "|" + ev.placa + "|" + ev.celda + "|" + ev.hora;
-
-            ofstream f("evento.txt", ios::app);
-            f << linea << "\n";
-            f.close();
-
-            return linea;
+    // Buscar celdas libres → ENTRADA
+    vector<int> libres;
+    for (int i = 0; i < celdas.size(); i++) {
+        if (celdas[i].placa == "LIBRE") {
+            libres.push_back(i);
         }
+    }
+
+    if (!libres.empty()) {
+        int idx = libres[rand() % libres.size()];
+        celdas[idx].placa = placa;
+        ev.celda = celdas[idx].nombre;
+        ev.tipo = "ENTRADA";
+        eventos.push_back(ev);
+
+        string linea = ev.tipo + "|" + ev.placa + "|" + ev.celda + "|" + ev.hora;
+        ofstream f("evento.txt", ios::app);
+        f << linea << "\n";
+        f.close();
+        return linea;
     }
 
     // Parqueadero lleno
